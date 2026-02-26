@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spike Report - Новости волейбола</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="main-nav">
+            <div class="logo">
+                <h1>Spike Report - Новости волейбола</h1>
+                <p>Здесь будут публиковаться новости волейбола</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="spike.html">Новости</a></li>
+                <li><a href="tournaments.html" class="active">Турниры</a></li>
+                <li><a href="players.html">Игроки</a></li>
+                <li><a href="contact.html">Обратная связь</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <article class="tournament-article">
+            <h2>Кубок России</h2>
+            <div class="match-result">
+                <img src="img/result.png" alt="Результат матча Кубка России" class="match-image">
+                <div class="match-info">
+                    <h3>Финал Кубка России</h3>
+                    <p>В захватывающем финальном матче Кубка России "Локомотив" одержал историческую победу над "Динамо" со счётом 3:2. Матч проходил в напряжённой борьбе, где каждая команда показала высокий уровень игры.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="league-table" id="vue-league-table">
+            <h2>Суперлига</h2>
+            <p class="table-description">
+              Текущее положение команд в Суперлиге. "Зенит-Казань" уверенно лидирует в турнирной таблице, демонстрируя стабильную игру на протяжении всего сезона.
+            </p>
+            <button @click="toggleTable">{{ showTable ? 'Скрыть' : 'Показать' }} таблицу</button>
+            <input v-model="filterText" placeholder="Фильтр по команде" style="margin-left:10px;">
+            <table class="standings-table" v-if="showTable">
+              <thead>
+                <tr>
+                  <th>Позиция</th>
+                  <th>Команда</th>
+                  <th>Игры</th>
+                  <th>Победы</th>
+                  <th>Поражения</th>
+                  <th>Очки</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(team, idx) in filteredTeams" :key="team.name">
+                  <td>{{ idx + 1 }}</td>
+                  <td>{{ team.name }}</td>
+                  <td>{{ team.games }}</td>
+                  <td>{{ team.wins }}</td>
+                  <td>{{ team.loses }}</td>
+                  <td>{{ team.points }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <p v-else>Таблица скрыта</p>
+          </article>
+    </main>
+    
+    <footer>
+        <p>Spike Report</p>
+        <p>email <a href="terkalov.android@mail.ru">terkalov.android@mail.ru</a></p>
+    </footer>
+    <script src="js/web.js"></script> 
+</body>
+</html>
